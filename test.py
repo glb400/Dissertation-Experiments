@@ -113,6 +113,7 @@ def sample(setting, num_localities):
     else:
         datum["gsemo / greedy"] = None
     datum["model"] = setting
+    datum["num_agents"] = 20 # model.num_agents
     print(f'gsemo = {gsemo}',f' greedy = {greedy}', f' gsemo / greedy = {gsemo} / {greedy}')
     data.append(datum)
     return datum
