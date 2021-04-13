@@ -19,5 +19,4 @@ Environments
 
 Questions
 ---------
-For questions on the simulations, please contact
-[Yuran Gu](guyrBurns@outlook.com).
+For questions on the simulations, please contact guyrBurns@outlook.com.
