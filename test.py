@@ -118,60 +118,23 @@ def sample(setting, num_localities):
     return datum
 
 from datetime import datetime
-for _ in range(5):
+for _ in range(2):
     for num_localities in [2]:
         for setting in settings:
             sample(setting, num_localities)
             print(datetime.now(), setting, num_localities, len(data))
 
 def _format_y(ratio):
-    return f"{ratio-1:,.0%}"
+    return "{:,.1%}".format(ratio-1)
 
 def plot():
     d = pandas.DataFrame(data)
-    y_min = 0.9
-    y_max = 1.2
-    g = seaborn.relplot(x="number of localities",
-                        y="gsemo / greedy", col="model", data=d,
-                        facet_kws={"ylim": (y_min, y_max)})
-    for i, setting in enumerate(settings):
-        up_outliers = {}
-        down_outliers = {}
-        for datum in data:
-            if datum["model"] != setting:
-                continue
-            ga = datum['gsemo / greedy']
-            nl = datum["number of localities"]
-            if ga > y_max:
-                if nl not in up_outliers:
-                    up_outliers[nl] = []
-                up_outliers[nl].append(ga)
-            if ga < y_min:
-                if nl not in down_outliers:
-                    down_outliers[nl] = []
-                down_outliers[nl].append(ga)
-        ax = g.axes[0][i]
-        ax.xaxis.set_major_locator(
-            matplotlib.ticker.MultipleLocator(5))
-        ax.yaxis.set_major_locator(
-            matplotlib.ticker.MultipleLocator(0.05))
+    g = seaborn.catplot(x="number of localities", 
+                        y="gsemo / greedy", col="num_agents",hue="model", data=d)
+    for ax in g.axes[0]:
         vals = ax.get_yticks()
         ax.set_yticklabels([_format_y(x) for x in vals])
         ax.set_ylabel("improvement of gsemo over greedy")
-        for nl in up_outliers:
-            label = "\n".join(_format_y(ga) for ga in up_outliers[nl])
-            ax.annotate(label, xy=(nl, y_max),
-                        xytext=(nl, y_max-0.025),
-                        horizontalalignment="center",
-                        verticalalignment="top",
-                        arrowprops={"color": "b", "arrowstyle": "->"})
-        for nl in down_outliers:
-            label = "\n".join(_format_y(ga) for ga in down_outliers[nl])
-            ax.annotate(label, xy=(nl, y_min),
-                        xytext=(nl, y_min+0.025),
-                        horizontalalignment="center",
-                        verticalalignment="bottom",
-                        arrowprops={"color": "b", "arrowstyle": "->"})
-    g.savefig("num_localities.pdf")
+    g.savefig("result.pdf")
 
 plot()
