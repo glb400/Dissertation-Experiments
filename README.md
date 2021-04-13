@@ -14,8 +14,8 @@ Requirements
 
 Environments
 ------------
-3.7 GHz Intel Core i9 10900k processor
-32 GB RAM
+- 3.7 GHz Intel Core i9 10900k processor
+- 32 GB RAM
 
 Questions
 ---------
