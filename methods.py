@@ -16,8 +16,9 @@ def gsemo_algorithm(model):
         pair (best_res,best_value) of type (list of int/None, float).
         The first component is the matching, the second its queried value in
         the model.
+    
+    we use matrix to show all possible agent-locality pairs
     """
-    # in element we use matrix to show all possible agent-locality pairs
     class ArchivedElem(object):
         def __init__(self, f1_value, f2_value, element, locality_per_agent):
             super(ArchivedElem, self).__init__()
@@ -58,17 +59,14 @@ def gsemo_algorithm(model):
     # logging
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
-    rq = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
-    log_path = os.path.dirname(os.getcwd()) + '/t1Logs/'
-    log_name = log_path + rq + '.log'
-    logfile = log_name
+    logfile = os.path.dirname(os.getcwd()) + '/Logs/' + time.strftime('%Y%m%d%H%M', time.localtime(time.time())) + '.log'
     fh = logging.FileHandler(logfile, mode='w')
     fh.setLevel(logging.DEBUG)
     formatter = logging.Formatter("%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s")
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 
-    T = 10000000
+    T = model.num_agents * 10000000
     for it in range(T):
         selected_elem = choice(archived_set)
         selected_elem = selected_elem.element
@@ -82,15 +80,15 @@ def gsemo_algorithm(model):
         selected_caps = [0 for _ in range(len(model.locality_caps))]
         locality_per_agent = [None for _ in range(model.num_agents)]
         for i in range(len(selected_elem)):
-            f = 0
+            cnt = 0
             for j in range(len(selected_elem[i])):
                 if selected_elem[i][j] == 1:
                     locality_per_agent[i] = j
-                    f += 1
+                    cnt += 1
                     selected_caps[j] += 1
                 else:
                     f2_selected += 1
-            if f > 1:
+            if cnt > 1:
                 f1_selected = -1
         for i in range(len(selected_caps)):
             if selected_caps[i] > model.locality_caps[i]:

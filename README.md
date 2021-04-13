@@ -2,7 +2,7 @@ Read me
 =======
 This repository contains the simulation code for the paper
 
-> Yuran Gu: Maximizing Monotone Approximately Submodular Functions under Matroid Constraints by Multi-Objective Evolutionary algorithms. 2021.
+> Yuran Gu: 毕业设计论文 2021.
 
 
 Requirements
