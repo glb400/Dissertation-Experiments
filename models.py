@@ -1,5 +1,4 @@
 from random import random, shuffle
-
 from igraph import Graph
 
 
