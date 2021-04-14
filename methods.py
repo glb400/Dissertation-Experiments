@@ -66,7 +66,7 @@ def gsemo_algorithm(model):
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 
-    T = model.num_agents * 10000000
+    T = (model.num_agents**2) * 1000000
     for it in range(T):
         selected_elem = choice(archived_set)
         selected_elem = selected_elem.element
