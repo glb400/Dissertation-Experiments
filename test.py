@@ -119,7 +119,7 @@ def sample(setting, num_localities):
     return datum
 
 from datetime import datetime
-for _ in range(2):
+for _ in range(5):
     for num_localities in [2]:
         for setting in settings:
             sample(setting, num_localities)
