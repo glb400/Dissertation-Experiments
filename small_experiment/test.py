@@ -13,8 +13,8 @@ seed(0)
 
 num_professions = 2  # This is a constant; changing it requires
                      # further code modifications
-num_agents = 20
-prof1 = 10
+num_agents = 100
+prof1 = 50
 prof2 = num_agents - prof1
 professions = [0] * prof1 + [1] * prof2
 random_samples = 1000
@@ -113,14 +113,14 @@ def sample(setting, num_localities):
     else:
         datum["gsemo / greedy"] = None
     datum["model"] = setting
-    datum["num_agents"] = 20 # model.num_agents
+    datum["num_agents"] = 50 # model.num_agents
     print(f'gsemo = {gsemo}',f' greedy = {greedy}', f' gsemo / greedy = {gsemo} / {greedy}')
     data.append(datum)
     return datum
 
 from datetime import datetime
-for _ in range(5):
-    for num_localities in [2]:
+for _ in range(2):
+    for num_localities in [10]:
         for setting in settings:
             sample(setting, num_localities)
             print(datetime.now(), setting, num_localities, len(data))
@@ -136,6 +136,6 @@ def plot():
         vals = ax.get_yticks()
         ax.set_yticklabels([_format_y(x) for x in vals])
         ax.set_ylabel("improvement of gsemo over greedy")
-    g.savefig("result.pdf")
+    g.savefig("result50v5.pdf")
 
 plot()
