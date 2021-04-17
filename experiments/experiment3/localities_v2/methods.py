@@ -68,7 +68,7 @@ def gsemo_algorithm(model):
     # fh.setFormatter(formatter)
     # logger.addHandler(fh)
 
-    T = len(model.locality_caps) * 1000000
+    T = len(model.locality_caps) * 100000
     for it in range(T):
         selected = choice(archived_set)
         selected_elem = [[0 for _ in range(len(model.locality_caps))] for _ in range(model.num_agents)]
