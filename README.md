@@ -2,7 +2,7 @@ Read me
 =======
 This repository contains the simulation code for the paper
 
-> Yu-Ran Gu: 毕业设计论文 2021.
+> Yu-Ran Gu: dissertation 2021.
 
 
 Requirements
