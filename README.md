@@ -1,8 +1,6 @@
 Read me
 =======
-This repository contains the simulation code for the paper
-
-> Yu-Ran Gu: dissertation 2021.
+This repository contains part of the simulation code for the Migrant Resettlement Problem.
 
 
 Requirements
